@@ -1,6 +1,6 @@
 <?php 
 
-class UsuariosModel extends Query{
+class CajasModel extends Query{
 
     private $usuario;
     private $nombre;
@@ -80,7 +80,7 @@ class UsuariosModel extends Query{
     {
         $this->id     = $id;
         $this->estado = $estado;
-        $sql          = "UPDATE productos SET estado = ?, id = ? WHERE id = $id";
+        $sql          = "UPDATE usuarios SET estado = ?, id = ? WHERE id = $id";
         $datos        = array($this->estado, $this->id);
         $data         = $this->save($sql, $datos);
         return $data; 

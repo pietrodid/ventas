@@ -61,6 +61,6 @@
         <script src="<?php echo base_url; ?>Assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="<?php echo base_url; ?>Assets/js/scripts.js"></script>
         <script> const base_url = "<?php echo base_url; ?>"; </script>
-        <script src="<?php echo base_url; ?>Assets/js/funciones.js"></script>
+        <script src="<?php echo base_url; ?>Assets/js/login.js"></script>
     </body>
 </html>

@@ -1,8 +1,8 @@
 <?php 
 
-class UsuariosModel extends Query{
+class CategoriasModel extends Query{
 
-    private $usuario;
+    private $Categoria;
     private $nombre;
     private $clave;
     private $id_caja;
@@ -13,9 +13,9 @@ class UsuariosModel extends Query{
     {
         parent::__construct();
     }
-    public function getUsuario(string $usuario, string $clave)
+    public function getCategoria(string $Categoria, string $clave)
     {
-        $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND clave = '$clave' ";
+        $sql = "SELECT * FROM Categorias WHERE Categoria = '$Categoria' AND clave = '$clave' ";
         $data = $this->select($sql);
         return $data;
     }
@@ -25,23 +25,23 @@ class UsuariosModel extends Query{
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function getUsuarios()
+    public function getCategorias()
     {
-        $sql = "SELECT u.*, c.id as id_caja, c.caja FROM usuarios u INNER JOIN caja c WHERE u.id_caja = c.id";
+        $sql = "SELECT u.*, c.id as id_caja, c.caja FROM Categorias u INNER JOIN caja c WHERE u.id_caja = c.id";
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function registrarUsuario(string $usuario, string $nombre, string $clave, int $id_caja)
+    public function registrarCategoria(string $Categoria, string $nombre, string $clave, int $id_caja)
     {
-        $this->usuario = $usuario;
+        $this->Categoria = $Categoria;
         $this->nombre  = $nombre;
         $this->clave   = $clave;
         $this->id_caja = $id_caja;
-        $verificar = "SELECT * FROM usuarios WHERE usuario = '$this->usuario'";
+        $verificar = "SELECT * FROM Categorias WHERE Categoria = '$this->Categoria'";
         $existe = $this->select($verificar);
         if (empty($existe)) {
-            $sql = "INSERT INTO usuarios(usuario,nombre,clave,id_caja) VALUES(?,?,?,?)";
-            $datos = array($this->usuario, $this->nombre, $this->clave, $this->id_caja,);
+            $sql = "INSERT INTO Categorias(Categoria,nombre,clave,id_caja) VALUES(?,?,?,?)";
+            $datos = array($this->Categoria, $this->nombre, $this->clave, $this->id_caja,);
             $data = $this->save($sql, $datos);
             if ($data == 1){
                 $res = "ok";
@@ -56,18 +56,18 @@ class UsuariosModel extends Query{
     }
     public function editarUser( int $id)
     {
-        $sql = "SELECT * FROM usuarios WHERE id = $id";
+        $sql = "SELECT * FROM Categorias WHERE id = $id";
         $data = $this->select($sql);
         return $data;
     }
-    public function modificarUsuario(string $usuario, string $nombre, int $id_caja, int $id)
+    public function modificarCategoria(string $Categoria, string $nombre, int $id_caja, int $id)
     {
-        $this->usuario = $usuario;
+        $this->Categoria = $Categoria;
         $this->nombre  = $nombre;
         $this->id_caja = $id_caja;
         $this->id      = $id;
-        $sql = "UPDATE usuarios SET usuario = ?, nombre = ?, id_caja = ?, id = ? WHERE id = $id";
-        $datos = array($this->usuario, $this->nombre, $this->id_caja, $this->id);
+        $sql = "UPDATE Categorias SET Categoria = ?, nombre = ?, id_caja = ?, id = ? WHERE id = $id";
+        $datos = array($this->Categoria, $this->nombre, $this->id_caja, $this->id);
         $data = $this->save($sql, $datos);
         if ($data == 1) {
             $res = "modificado";
@@ -80,7 +80,7 @@ class UsuariosModel extends Query{
     {
         $this->id     = $id;
         $this->estado = $estado;
-        $sql          = "UPDATE productos SET estado = ?, id = ? WHERE id = $id";
+        $sql          = "UPDATE Categorias SET estado = ?, id = ? WHERE id = $id";
         $datos        = array($this->estado, $this->id);
         $data         = $this->save($sql, $datos);
         return $data; 
