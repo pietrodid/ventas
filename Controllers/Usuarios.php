@@ -71,7 +71,7 @@ class Usuarios extends Controller{
                 if($clave != $confirmar){
                     $msg = "Las contraseñas no coinciden";
                 }else {
-                    $data = $this->model->registrarUsuario($usuario, $nombre, $hash, $caja);
+                    $data = $this->model->registrarUser($usuario, $nombre, $hash, $caja);
                     if($data == "ok"){
                         $msg = "si";
                     }else if($data == "existe"){

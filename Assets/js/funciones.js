@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function(){
         },
         columns: [
             {'data': 'id'},
+            {'data': 'imagen'},
             {'data': 'codigo'},    
             {'data': 'descripcion'},
             {'data': 'precio_venta'},
@@ -459,6 +460,7 @@ function frmProducto(){
     document.getElementById("frmProducto").reset();
     $("#nuevo_producto").modal("show");
     document.getElementById("id").value = "";
+    deleteImg();
 }
 
 function registrarPro(event) {
@@ -526,7 +528,7 @@ function registrarPro(event) {
 function btnEditarPro(id)
 {
     document.getElementById("title").innerHTML = "Actualizar Producto";
-    document.getElementById("btnAccion").innerHTML = "Actualizar";
+    document.getElementById("btnAccion").innerHTML = "Modificar";
     const http = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         const url = base_url + "/Productos/editar/" + id;
         http.open("GET", url, true);
@@ -541,6 +543,11 @@ function btnEditarPro(id)
                 document.getElementById("precio_venta").value = res.precio_venta;
                 document.getElementById("medida").value = res.id_medida;
                 document.getElementById("categoria").value = res.id_categoria;
+                document.getElementById("img-preview").src= base_url + "Assets/img/"+ res.foto;
+                document.getElementById("icon-close").innerHTML = `<button class="btn btn-danger" onclick="deleteImg()"><i class="fas fa-times"></i></button>`;
+                document.getElementById("icon-image").classList.add("d-none");
+                document.getElementById("foto_actual").value = res.foto;
+                document.getElementById("foto_delete").value = res.foto;
                 $("#nuevo_producto").modal("show"); 
             }
         }
@@ -626,6 +633,23 @@ function btnReingresarPro(id) {
             }
       })
 }
+
+function preview(e) {
+    const url = e.target.files[0];
+    const urlTmp = URL.createObjectURL(url);
+    document.getElementById("img-preview").src= urlTmp;
+    document.getElementById("icon-image").classList.add("d-none");
+    document.getElementById("icon-close").innerHTML = `<button class="btn btn-danger" onclick="deleteImg()"><i class="fas fa-times"></i></button> ${url['name']}`;
+}
+
+function deleteImg() {
+    document.getElementById("icon-close").innerHTML = "";
+    document.getElementById("icon-image").classList.remove("d-none");
+    document.getElementById("img-preview").src= "";
+    document.getElementById("imagen").value = '';
+    document.getElementById("foto_delete").value = '';
+}
+
 // Fin Productos
 
 function frmMedida(){
@@ -635,7 +659,7 @@ function frmMedida(){
     $("#nueva_medida").modal("show");
     document.getElementById("id").value = "";
 }
-function registrarUser(event) {
+function registrarMed(event) {
     event.preventDefault();
     const medida = document.getElementById("medida");
     const nombre = document.getElementById("nombre");
@@ -769,7 +793,7 @@ function btnReingresarUser(id) {
       }).then((result) => {
         if (result.isConfirmed) {
             const http = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-                const url = base_url + "/Usuarios/reingresar/" + id;
+                const url = base_url + "/Medidas/reingresar/" + id;
                 http.open("GET", url, true);
                 http.send();
                 http.onreadystatechange = function(){

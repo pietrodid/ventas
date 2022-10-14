@@ -31,7 +31,7 @@ class UsuariosModel extends Query{
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function registrarUsuario(string $usuario, string $nombre, string $clave, int $id_caja)
+    public function registrarUser(string $usuario, string $nombre, string $clave, int $id_caja)
     {
         $this->usuario = $usuario;
         $this->nombre  = $nombre;

@@ -18,6 +18,7 @@ class Productos extends Controller{
     public function listar(){
         $data = ($this->model->getProductos());
         for ($i=0; $i < count($data); $i++) {
+            $data[$i]['imagen'] = '<img class="img-thumbnail" src="'. base_url. "Assets/img/". $data[$i]['foto'].'" width="100">';
             if ($data[$i]['estado'] == 1){
                 $data[$i]['estado'] = '<span class="badge bg-success">Activo</span>';
                 $data[$i]['acciones'] = '<div>
@@ -44,13 +45,23 @@ class Productos extends Controller{
         $medida      = $_POST['medida'];
         $categoria        = $_POST['categoria'];
         $id = $_POST['id'];
+        $img = $_FILES['imagen'];
+        $name = $img['name'];
+        $tmpname = $img['tmp_name'];
+        $destino = "Assets/img/".$name;
+
+        if(empty($name)) {
+            $name = "sinfoto.png";
+        }
         if(empty($codigo) || empty($nombre) || empty($precio_compra) || empty($precio_venta)){
             $msg = "Todo los campos son obligatorios";
         }else{
+
             if($id == ""){
-                $data = $this->model->registrarProducto($codigo, $nombre, $precio_compra, $precio_venta, $medida, $categoria);
+                $data = $this->model->registrarProducto($codigo, $nombre, $precio_compra, $precio_venta, $medida, $categoria, $name);
                 if($data == "ok"){
                     $msg = "si";
+                    move_uploaded_file($tmpname, $destino);
                 }else if($data == "existe"){
                     $msg = "El Producto ya existe";
                 }else {
@@ -58,11 +69,12 @@ class Productos extends Controller{
                 }
                 
             }else{
-                $data = $this->model->modificarProducto($codigo, $nombre, $precio_compra, $precio_venta, $medida, $categoria, $id);
-                if($data == "modificado"){
-                    $msg = "modificado";
-                }else {
-                    $msg = "Error al modificar el Producto";
+                    $data = $this->model->modificarPro($codigo, $nombre, $precio_compra, $precio_venta, $medida, $categoria, $name, $id);
+                    if($data == "modificado"){
+                        move_uploaded_file($tmpname, $destino);
+                        $msg = "modificado";    
+                    }else {
+                        $msg = "Error al modificar el Producto";
                 }
             }
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
