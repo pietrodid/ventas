@@ -1,6 +1,6 @@
 <?php 
 
-class CategoriasModel extends Query{
+class ComprasModel extends Query{
 
     private $nombre;
     private $id;
