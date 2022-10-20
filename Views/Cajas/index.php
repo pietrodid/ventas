@@ -1,5 +1,5 @@
 <?php include "Views/Templates/header.php"; ?>
-<ol class="breadcrumb mb-4">    
+<ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active">Cajas</li>
 </ol>
 <button class="btn btn-primary mb-2" type="button" onclick="frmCajas();"><i class="fas fa-plus"></i></button>
@@ -34,7 +34,7 @@
                         <label for="nombre">Nombre</label>
                         <input id="nombre" class="form-control" type="text" name="nombre" placeholder="Nombre del Usuario">
                     </div>
-                    <div class="row" id="claves"> 
+                    <div class="row" id="claves">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="clave">Contraseña</label>
@@ -51,8 +51,8 @@
                     <div class="form-group mt-2">
                         <label for="caja">Caja</label>
                         <select id="caja" class="form-control" name="caja">
-                        <?php foreach ($data['cajas'] as $row) { ?> 
-                            <option value="<?php echo $row['id']; ?>"><?php echo $row['caja']; ?></option>
+                            <?php foreach ($data['cajas'] as $row) { ?>
+                                <option value="<?php echo $row['id']; ?>"><?php echo $row['caja']; ?></option>
                             <?php } ?>
                         </select>
                         <button class="btn btn-primary mt-2" type="button" id="btnAccion" onclick="registrarUser(event); ">Registrar</button>
@@ -64,5 +64,3 @@
     </div>
 </div>
 <?php include "Views/Templates/footer.php"; ?>
-
- 

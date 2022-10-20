@@ -1,70 +1,58 @@
 <?php 
 
 class ComprasModel extends Query{
-
-    private $nombre;
-    private $id;
-    private $estado;
-
+    
     public function __construct()
     {
         parent::__construct();
     }
-
-    public function getCategorias()
+    public function getProCod(string $cod)
     {
-        $sql = "SELECT * FROM categorias";
-        $data = $this->selectAll($sql);
-        return $data;
-    }
-    public function registrarCategoria(string $nombre)
-    {
-        $this->nombre  = $nombre;
-        $verificar = "SELECT * FROM categorias WHERE nombre = '$this->nombre'";
-        $existe = $this->select($verificar);
-        if (empty($existe)) {
-            $sql = "INSERT INTO categorias(nombre) VALUES(?)";
-            $datos = array($this->nombre);
-            $data = $this->save($sql, $datos);
-            if ($data == 1){
-                $res = "ok";
-            }else{
-                $res = "Error";
-            }
-        }else {
-            $res = "existe";
-        }
-
-        return $res;
-    }
-    public function editarCat( int $id)
-    {
-        $sql = "SELECT * FROM categorias WHERE id = $id";
+        $sql = "SELECT * FROM productos WHERE codigo = '$cod'";
         $data = $this->select($sql);
         return $data;
     }
-    public function modificarCategoria(string $Categoria, string $nombre, int $id_caja, int $id)
+    public function getProductos(int $id)
     {
-        $this->nombre  = $nombre;
-        $this->id      = $id;
-        $sql = "UPDATE categorias SET nombre = ? WHERE id = $id";
-        $datos = array($this->nombre, $this->id);
+        $sql = "SELECT * FROM productos WHERE id = $id";
+        $data = $this->select($sql);
+        return $data;
+    }
+    public function registrarDetalle(int $id_producto,int $id_usuario,int $precio,string $cantidad,string $sub_total)
+    {
+        $sql = "INSERT INTO detalle(id_producto, id_usuario, precio, cantidad, sub_total) VALUES (?,?,?,?,?)";
+        $datos = array($id_producto, $id_usuario, $precio, $cantidad, $sub_total);
         $data = $this->save($sql, $datos);
         if ($data == 1) {
-            $res = "modificado";
-        }else{
+            $res = "ok";
+        }else {
             $res = "error";
         }
         return $res;
     }
-    public function accionCat(int $estado, int $id)
+    public function getDetalle(int $id)
     {
-        $this->id     = $id;
-        $this->estado = $estado;
-        $sql          = "UPDATE categorias SET estado = ?, id = ? WHERE id = $id";
-        $datos        = array($this->estado, $this->id);
-        $data         = $this->save($sql, $datos);
-        return $data; 
+        $sql = "SELECT d.*, p.id AS id_pro, p.descripcion FROM detalle d INNER JOIN productos p on d.id_producto = p.id WHERE d.id_usuario = $id";
+        $data = $this->selectAll($sql);
+        return $data;
+    }
+    public function calcularCompra(int $id_usuario)
+    {
+        $sql = "SELECT sub_total, SUM(sub_total) AS total FROM detalle WHERE id_usuario = $id_usuario";
+        $data = $this->select($sql);
+        return $data;
+    }
+    public function deleteDetalle(int $id)
+    {
+        $sql = "DELETE FROM detalle WHERE id = ?";
+        $datos = array($id);
+        $data = $this->save($sql, $datos);
+        if ($data == 1) {
+            $res = "ok";
+        }else {
+            $res = "error";
+        }
+        return $res;
     }
 }
 ?>

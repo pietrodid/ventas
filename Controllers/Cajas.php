@@ -100,4 +100,3 @@ class Cajas extends Controller{
         header("location:".base_url);
     }
 }
-?>

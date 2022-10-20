@@ -1,5 +1,5 @@
 <?php include "Views/Templates/header.php"; ?>
-<ol class="breadcrumb mb-4">    
+<ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active">Medidas</li>
 </ol>
 <button class="btn btn-primary mb-2" type="button" onclick="frmMedida();"><i class="fas fa-plus"></i></button>
@@ -45,5 +45,3 @@
     </div>
 </div>
 <?php include "Views/Templates/footer.php"; ?>
-
- 

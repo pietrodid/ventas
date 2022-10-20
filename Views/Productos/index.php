@@ -1,5 +1,5 @@
 <?php include "Views/Templates/header.php"; ?>
-<ol class="breadcrumb mb-4">    
+<ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active">Productos</li>
 </ol>
 <button class="btn btn-primary mb-2" type="button" onclick="frmProducto();"><i class="fas fa-plus"></i></button>
@@ -30,7 +30,7 @@
             </div>
             <div class="modal-body">
                 <form method="post" id="frmProducto">
-                    <div class="row" id="claves"> 
+                    <div class="row" id="claves">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="precio_compra">Precio Compra</label>
@@ -50,8 +50,8 @@
                                 <label for="codigo">Código de barras</label>
                                 <input type="hidden" id="id" name="id">
                                 <input id="codigo" class="form-control" type="text" name="codigo" placeholder="Código de barras">
-                        </div> 
-                    </div>
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nombre">Descripción</label>
@@ -62,21 +62,21 @@
                             <div class="form-group">
                                 <label for="medida">Medidas</label>
                                 <select id="medida" class="form-control" name="medida">
-                                <?php foreach ($data['medidas'] as $row) { ?> 
-                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
+                                    <?php foreach ($data['medidas'] as $row) { ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
-                        </div>               
+                        </div>
                         <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="categoria">Categorias</label>
-                                    <select id="categoria" class="form-control" name="categoria">
-                                    <?php foreach ($data['categorias'] as $row) { ?> 
+                            <div class="form-group">
+                                <label for="categoria">Categorias</label>
+                                <select id="categoria" class="form-control" name="categoria">
+                                    <?php foreach ($data['categorias'] as $row) { ?>
                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
+                                    <?php } ?>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
@@ -87,20 +87,18 @@
                                         <span id="icon-close"></span>
                                         <input id="imagen" class="d-none" type="file" name="imagen" onchange="preview(event)">
                                         <input type="hidden" id="foto_actual" name="foto_actual">
-                                        <img class="img-thumbnail" id="img-preview">   
+                                        <img class="img-thumbnail" id="img-preview">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                        <button class="btn btn-primary mt-2" type="button" id="btnAccion" onclick="registrarPro(event); ">Registrar</button>
-                        <button class="btn btn-danger mt-2" type="button" data-bs-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
+                    <button class="btn btn-primary mt-2" type="button" id="btnAccion" onclick="registrarPro(event); ">Registrar</button>
+                    <button class="btn btn-danger mt-2" type="button" data-bs-dismiss="modal">Cancelar</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
+</div>
 <?php include "Views/Templates/footer.php"; ?>
-
- 

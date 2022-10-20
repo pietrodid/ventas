@@ -127,4 +127,3 @@ class Usuarios extends Controller{
         header("location:".base_url);
     }
 }
-?>

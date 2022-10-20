@@ -100,4 +100,3 @@ class Medidas extends Controller{
         header("location:".base_url);
     }
 }
-?>

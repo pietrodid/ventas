@@ -76,7 +76,7 @@ class Productos extends Controller{
                 
             }else{
                 $imgDelete = $this->model->editarPro($id);
-                if($imgDelete['foto'] != 'sinfoto.png' || $imgDelete['foto'] != "") {
+                if($imgDelete['foto'] != 'sinfoto.png') {
                     if(file_exists("Assets/img/" . $imgDelete['foto'])){
                         unlink("Assets/img/" . $imgDelete['foto']);
                     }
@@ -125,4 +125,3 @@ class Productos extends Controller{
         die();
     }
 }
-?>

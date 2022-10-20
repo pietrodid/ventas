@@ -1,6 +1,6 @@
 <?php include "Views/Templates/header.php"; ?>
 
-<ol class="breadcrumb mb-4">    
+<ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active">Clientes</li>
 </ol>
 <button class="btn btn-primary mb-2" type="button" onclick="frmCliente();"><i class="fas fa-plus"></i></button>
@@ -48,15 +48,13 @@
                         <label for="telefono">Teléfono</label>
                         <input id="telefono" class="form-control" type="text" name="telefono" placeholder="Teléfono">
                     </div>
-                        <button class="btn btn-primary mt-2" type="button" id="btnAccion" onclick="registrarCliente(event); ">Registrar</button>
-                        <button class="btn btn-danger mt-2" type="button" data-bs-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
+                    <button class="btn btn-primary mt-2" type="button" id="btnAccion" onclick="registrarCliente(event); ">Registrar</button>
+                    <button class="btn btn-danger mt-2" type="button" data-bs-dismiss="modal">Cancelar</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
+</div>
 
 <?php include "Views/Templates/footer.php"; ?>
-
- 

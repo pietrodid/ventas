@@ -100,4 +100,3 @@ class Categorias extends Controller{
         header("location:".base_url);
     }
 }
-?>

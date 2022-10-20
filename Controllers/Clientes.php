@@ -100,4 +100,3 @@ class Clientes extends Controller{
         header("location:".base_url);
     }
 }
-?>

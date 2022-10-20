@@ -86,4 +86,3 @@ class CajasModel extends Query{
         return $data; 
     }
 }
-?>
