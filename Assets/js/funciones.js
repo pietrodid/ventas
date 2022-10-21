@@ -697,8 +697,13 @@ function calcularPrecio(e){
                 if (this.readyState == 4 && this.status == 200) {
                     const res = JSON.parse(this.responseText);                  
                  if (res == 'ok'){
+                    alert('ingresado');
                     frm.reset();
                     cargarDetalle();
+                    }else if (res == 'modificado') {
+                        alert('Producto Actualizado');
+                        frm.reset();
+                        cargarDetalle();
                     }
                 }
             }
@@ -932,4 +937,41 @@ function deleteDetalle(id) {
             }
         }           
     }
+}
+
+function generarCompra() {
+    Swal.fire({
+        title: 'Esta seguro de realizar la compra?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si!',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const http = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            const url = base_url + "/Compras/registrarCompra";
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    if (res == "ok") {
+                        Swal.fire({
+                            title: 'Mensaje!',
+                            text: "Compra generada",
+                            icon: 'success',
+                        })
+                    } else {
+                        Swal.fire({
+                            title: 'Mensaje!',
+                            text: res,
+                            icon: 'error',
+                        })
+                    }
+                }
+            }
+        }
+    })
 }

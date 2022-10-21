@@ -54,5 +54,35 @@ class ComprasModel extends Query{
         }
         return $res;
     }
+    public function consultarDetalle(int $id_producto, int $id_usuario)
+    {
+        $sql = "SELECT * FROM detalle WHERE id_producto = $id_producto AND id_usuario = $id_usuario";
+        $data = $this->select($sql);
+        return $data;
+    }
+    public function actualizarDetalle (int $precio, string $cantidad, string $sub_total, int $id_producto, int $id_usuario)
+    {
+        $sql = "UPDATE detalle SET precio = ?, cantidad = ?, sub_total = ? WHERE id_producto = ? AND id_usuario = ?";
+        $datos = array( $precio, $cantidad, $sub_total, $id_producto, $id_usuario);
+        $data = $this->save($sql, $datos);
+        if ($data == 1) {
+            $res = "modificado";
+        }else {
+            $res = "error";
+        }
+        return $res;
+    }
+    public function registrarCompra(string $total)
+    {
+        $sql = "INSERT INTO compras (total) VALUES (?)";
+        $datos = array($total);
+        $data = $this->save($sql, $datos);
+        if ($data == 1) {
+            $res = "ok";
+        }else {
+            $res = "error";
+        }
+        return $res;
+    }
 }
 ?>
